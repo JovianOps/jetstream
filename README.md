@@ -1,5 +1,7 @@
 # Jetstream
 
+[![Jetstream CI](https://github.com/JovianOps/jetstream/actions/workflows/ci.yml/badge.svg)](https://github.com/JovianOps/jetstream/actions/workflows/ci.yml)
+
 A lean Drupal 11 project template. Nine questions, three containers, one CI workflow — then it gets out of your way.
 
 ```bash
@@ -38,7 +40,8 @@ Deliberately absent until needed: Solr, ClamAV, browser testing, Storybook, npm 
 - ✅ `install.php` + manifest: proven here — `php tests/install_test.php` prints `OK: installer installs, skips, updates and validates.` Every template file renders with zero unreplaced `{{TOKENS}}` under both option sets.
 - ✅ `bin/fetch-db.php` + `bin/notify.php`: proven here — `php tests/bin_test.php` prints `OK: fetch-db and notify work against live endpoints.` (local file + HTTP + gzip paths, refusal of non-SQL, webhook 2xx/5xx handling).
 - ✅ All PHP lint-clean (`php -l`).
-- ⏳ Docker stack, `composer build` inside containers, and the CI workflow need Docker + a Drupal install — unverified locally (no Docker on this machine). They run in CI on every push; treat them as beta until green there.
+- ✅ Docker stack: proven in CI — the `docker` job renders the template, builds both images, installs Drupal 11 from scratch, and curls a 200 homepage on every push.
+- ✅ CI workflow: `php` (lint + installer + bin tests) and `docker` (full build) jobs, both green with badge above.
 
 ## Daily commands (inside a generated project)
 
