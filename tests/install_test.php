@@ -66,6 +66,11 @@ $check('Machine name derives from the site.', is_file($dest . '/web/themes/custo
 $check('Lagoon settings install when chosen.', is_file($dest . '/web/sites/default/includes/settings.lagoon.php'));
 $check('Theme installs when chosen.', is_file($dest . '/web/themes/custom/acme_site_theme/acme_site_theme.libraries.yml'));
 $check('CI workflow installs.', is_file($dest . '/.github/workflows/ci.yml'));
+$check('DB fetch script installs.', is_file($dest . '/bin/fetch-db.php'));
+$check('Notify script installs.', is_file($dest . '/bin/notify.php'));
+$check('Renovate config installs.', is_file($dest . '/renovate.json'));
+$check('PHPUnit config installs.', is_file($dest . '/phpunit.xml'));
+$check('Lagoon config installs when chosen.', is_file($dest . '/.lagoon.yml'));
 $check('Receipt records answers.', str_contains((string) @file_get_contents($dest . '/.jetstream.json'), '"hosting": "lagoon"'));
 
 $leftovers = [];
@@ -90,6 +95,7 @@ $dest2 = $sandbox('minimal');
 $run(sprintf('--dest=%s --no-interaction --config=%s', escapeshellarg($dest2), escapeshellarg($config($minimal))));
 
 $check('Lagoon settings skip when not chosen.', !is_file($dest2 . '/web/sites/default/includes/settings.lagoon.php'));
+$check('Lagoon config skips when not chosen.', !is_file($dest2 . '/.lagoon.yml'));
 $check('Theme skips when not chosen.', !is_dir($dest2 . '/web/themes/custom'));
 $check('Base settings still install.', is_file($dest2 . '/web/sites/default/settings.php'));
 

@@ -62,6 +62,10 @@
             "docker compose exec web drush --root=/app/web cache:rebuild"
         ],
         "test": "docker compose exec web drush --root=/app/web status --field=drupal-version",
+        "test-unit": "docker compose exec web ./vendor/bin/phpunit --testsuite=unit",
+        "db:fetch": "php bin/fetch-db.php",
+        "db:import": "docker compose exec web drush --root=/app/web sql:query --file=/app/.data/db.sql",
+        "notify": "php bin/notify.php",
         "login": "docker compose exec web drush --root=/app/web user:login"
     }
 }

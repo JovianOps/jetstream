@@ -1,0 +1,19 @@
+docker-compose-yaml: docker-compose.yml
+
+environment_variables:
+  git_sha: 'true'
+
+environments:
+  main:
+    routes:
+      - nginx:
+          - "{{MACHINE}}.lagoon.example.com"
+    cron:
+      - name: Drupal cron
+        schedule: "*/15 * * * *"
+        command: drush --root=/app/web cron
+    post-rollout:
+      - run:
+          name: Provision the release
+          command: drush --root=/app/web updatedb -y && drush --root=/app/web config:import -y && drush --root=/app/web cache:rebuild
+          service: web
