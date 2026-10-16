@@ -78,7 +78,8 @@ echo "OK: fetch-db and notify work against live endpoints.\n";
  * @return array{handle: mixed, pipes: array}
  */
 function startServer(string $docroot): array {
-  $descriptor = [0 => ['file', 'NUL', 'r'], 1 => ['file', 'NUL', 'w'], 2 => ['file', 'NUL', 'w']];
+  $null = PHP_OS_FAMILY === 'Windows' ? 'NUL' : '/dev/null';
+  $descriptor = [0 => ['file', $null, 'r'], 1 => ['file', $null, 'w'], 2 => ['file', $null, 'w']];
   $process = proc_open([PHP_BINARY, '-S', '127.0.0.1:8767', '-t', $docroot], $descriptor, $pipes);
 
   if (!is_resource($process)) {
