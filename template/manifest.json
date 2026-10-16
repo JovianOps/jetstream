@@ -7,6 +7,7 @@
     {"path": ".gitignore", "managed": true},
     {"path": ".editorconfig", "managed": true},
     {"path": "docker-compose.yml", "managed": true},
+    {"path": "Dockerfile.web", "managed": true},
     {"path": "Caddyfile", "managed": true},
     {"path": "drush/drush.yml", "managed": true},
     {"path": "bin/fetch-db.php", "managed": true},

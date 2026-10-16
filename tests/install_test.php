@@ -65,6 +65,7 @@ $check('Full install renders composer.json.', is_file($dest . '/composer.json'))
 $check('Machine name derives from the site.', is_file($dest . '/web/themes/custom/acme_site_theme/acme_site_theme.info.yml'));
 $check('Lagoon settings install when chosen.', is_file($dest . '/web/sites/default/includes/settings.lagoon.php'));
 $check('Theme installs when chosen.', is_file($dest . '/web/themes/custom/acme_site_theme/acme_site_theme.libraries.yml'));
+$check('Web Dockerfile installs.', is_file($dest . '/Dockerfile.web'));
 $check('CI workflow installs.', is_file($dest . '/.github/workflows/ci.yml'));
 $check('DB fetch script installs.', is_file($dest . '/bin/fetch-db.php'));
 $check('Notify script installs.', is_file($dest . '/bin/notify.php'));

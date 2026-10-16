@@ -1,0 +1,11 @@
+{
+  "org": "acme",
+  "site": "CI Smoke Site",
+  "machine": "ci_smoke",
+  "description": "Jetstream CI smoke project",
+  "admin_email": "admin@example.com",
+  "hosting": "lagoon",
+  "redis": "y",
+  "theme": "y",
+  "db": "profile"
+}

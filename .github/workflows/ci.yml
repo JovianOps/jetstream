@@ -1,0 +1,45 @@
+name: Jetstream CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+      - run: php -l install.php
+      - run: php -l template/bin/fetch-db.php
+      - run: php -l template/bin/notify.php
+      - run: php tests/install_test.php
+      - run: php tests/bin_test.php
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: php
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, xml, curl, zip, gd, pdo_mysql
+          tools: composer:v2
+      - run: php install.php --dest=site --no-interaction --config=tests/ci-answers.json
+      - run: cp .env.example .env
+        working-directory: site
+      - run: docker compose up -d --wait
+        working-directory: site
+      - run: composer install --no-progress --no-interaction
+        working-directory: site
+      - run: docker compose exec -T web drush --root=/app/web site:install minimal --account-mail=admin@example.com -y
+        working-directory: site
+      - run: docker compose exec -T web drush --root=/app/web status --field=drupal-version
+        working-directory: site
+      - run: curl -fsS http://localhost:8080/ > /dev/null
+      - run: docker compose down -v
+        if: always()
+        working-directory: site

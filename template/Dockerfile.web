@@ -1,0 +1,15 @@
+# FrankenPHP + Composer build for the web service.
+# Stock FrankenPHP serves PHP but ships no Composer and not all extensions
+# Drupal needs, so this thin layer adds both.
+FROM dunglas/frankenphp:1-php8.4
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+RUN install-php-extensions \
+    pdo_mysql \
+    gd \
+    zip \
+    opcache \
+    intl \
+    bcmath \
+    exif

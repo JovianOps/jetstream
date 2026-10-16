@@ -52,11 +52,14 @@
         "down": "docker compose down",
         "build": [
             "@composer install",
-            "docker compose exec web composer install --working-dir=/app",
-            "docker compose exec web drush --root=/app/web site:install minimal --existing-config --account-mail={{ADMIN_EMAIL}} -y"
+            "docker compose exec web drush --root=/app/web site:install minimal --account-mail={{ADMIN_EMAIL}} -y"
+        ],
+        "deploy": [
+            "docker compose exec web drush --root=/app/web updatedb -y",
+            "docker compose exec web drush --root=/app/web config:import -y",
+            "docker compose exec web drush --root=/app/web cache:rebuild"
         ],
         "provision": [
-            "docker compose exec web drush --root=/app/web sql:query --file=/app/.data/db.sql",
             "docker compose exec web drush --root=/app/web updatedb -y",
             "docker compose exec web drush --root=/app/web config:import -y",
             "docker compose exec web drush --root=/app/web cache:rebuild"

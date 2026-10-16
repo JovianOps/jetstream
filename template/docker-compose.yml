@@ -1,7 +1,9 @@
 name: {{MACHINE}}
 services:
   web:
-    image: dunglas/frankenphp:1-php8.4
+    build:
+      context: .
+      dockerfile: Dockerfile.web
     restart: unless-stopped
     ports:
       - "${JETSTREAM_HOST_PORT:-8080}:80"
