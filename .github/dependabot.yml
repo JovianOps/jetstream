@@ -1,0 +1,52 @@
+# Dependabot: weekly minor/patch groups, majors solo, Jakarta mornings.
+# The template/ blocks keep generated projects fresh at the source.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Jakarta
+    groups:
+      actions-minor-patch:
+        patterns: ["*"]
+        update-types: [minor, patch]
+    labels: [dependencies, ci]
+    commit-message:
+      prefix: chore
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: composer
+    directory: /template
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Jakarta
+    groups:
+      php-minor-patch:
+        patterns: ["*"]
+        update-types: [minor, patch]
+    labels: [dependencies, php]
+    commit-message:
+      prefix: chore
+      include: scope
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: docker
+    directory: /template
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Jakarta
+    groups:
+      docker-minor-patch:
+        patterns: ["*"]
+        update-types: [minor, patch]
+    labels: [dependencies, docker]
+    commit-message:
+      prefix: chore
+    open-pull-requests-limit: 5
