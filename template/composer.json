@@ -30,9 +30,7 @@
         {
             "type": "vcs",
             "url": "https://github.com/JovianOps/beacon"
-        }
-    ],
-    "repositories": [
+        },
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
