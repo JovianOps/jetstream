@@ -7,8 +7,7 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-      day: monday
+      interval: daily
       time: "06:00"
       timezone: Asia/Jakarta
     groups:
@@ -23,8 +22,7 @@ updates:
   - package-ecosystem: docker
     directory: /template
     schedule:
-      interval: weekly
-      day: monday
+      interval: daily
       time: "06:00"
       timezone: Asia/Jakarta
     groups:
