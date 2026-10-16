@@ -38,9 +38,9 @@ jobs:
         working-directory: site
       - run: composer install --no-progress --no-interaction
         working-directory: site
-      - run: docker compose exec -T web drush --root=/app/web site:install minimal --account-mail=admin@example.com -y
+      - run: docker compose exec -T web php vendor/bin/drush --root=/app/web site:install minimal --account-mail=admin@example.com -y
         working-directory: site
-      - run: docker compose exec -T web drush --root=/app/web status --field=drupal-version
+      - run: docker compose exec -T web php vendor/bin/drush --root=/app/web status --field=drupal-version
         working-directory: site
       - run: curl -fsS http://localhost:8080/ > /dev/null
       - run: docker compose down -v

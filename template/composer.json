@@ -61,23 +61,23 @@
         "down": "docker compose down",
         "build": [
             "@composer install",
-            "docker compose exec web drush --root=/app/web site:install minimal --account-mail={{ADMIN_EMAIL}} -y"
+            "docker compose exec web php vendor/bin/drush --root=/app/web site:install minimal --account-mail={{ADMIN_EMAIL}} -y"
         ],
         "deploy": [
-            "docker compose exec web drush --root=/app/web updatedb -y",
-            "docker compose exec web drush --root=/app/web config:import -y",
-            "docker compose exec web drush --root=/app/web cache:rebuild"
+            "docker compose exec web php vendor/bin/drush --root=/app/web updatedb -y",
+            "docker compose exec web php vendor/bin/drush --root=/app/web config:import -y",
+            "docker compose exec web php vendor/bin/drush --root=/app/web cache:rebuild"
         ],
         "provision": [
-            "docker compose exec web drush --root=/app/web updatedb -y",
-            "docker compose exec web drush --root=/app/web config:import -y",
-            "docker compose exec web drush --root=/app/web cache:rebuild"
+            "docker compose exec web php vendor/bin/drush --root=/app/web updatedb -y",
+            "docker compose exec web php vendor/bin/drush --root=/app/web config:import -y",
+            "docker compose exec web php vendor/bin/drush --root=/app/web cache:rebuild"
         ],
-        "test": "docker compose exec web drush --root=/app/web status --field=drupal-version",
+        "test": "docker compose exec web php vendor/bin/drush --root=/app/web status --field=drupal-version",
         "test-unit": "docker compose exec web ./vendor/bin/phpunit --testsuite=unit",
         "db:fetch": "php bin/fetch-db.php",
-        "db:import": "docker compose exec web drush --root=/app/web sql:query --file=/app/.data/db.sql",
+        "db:import": "docker compose exec web php vendor/bin/drush --root=/app/web sql:query --file=/app/.data/db.sql",
         "notify": "php bin/notify.php",
-        "login": "docker compose exec web drush --root=/app/web user:login"
+        "login": "docker compose exec web php vendor/bin/drush --root=/app/web user:login"
     }
 }
