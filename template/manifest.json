@@ -1,6 +1,7 @@
 {
   "jetstream": "1",
   "files": [
+    {"path": "LICENSE", "managed": true},
     {"path": "composer.json", "managed": true},
     {"path": ".env.example", "managed": true},
     {"path": ".gitignore", "managed": true},
