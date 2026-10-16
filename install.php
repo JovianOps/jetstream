@@ -16,7 +16,7 @@ declare(strict_types=1);
  * Update mode re-renders managed files only, preserving project content.
  */
 
-const JETSTREAM_VERSION = '1.0.0';
+const JETSTREAM_VERSION = '1.1.0';
 
 $questions = [
   'org' => ['Organization (composer vendor)', 'jovian', '/^[a-z0-9-]+$/'],
