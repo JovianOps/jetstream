@@ -14,7 +14,8 @@
         "drupal/core-recommended": "^11",
         "drupal/pathauto": "^1.13",
         "drupal/redirect": "^1.13",
-        "drush/drush": "^13"
+        "drush/drush": "^13",
+        "jovian/beacon": "^1.0"
     },
     "require-dev": {
         "drupal/devel": "^5.5",
@@ -25,6 +26,12 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/JovianOps/beacon"
+        }
+    ],
     "repositories": [
         {
             "type": "composer",
