@@ -1,0 +1,48 @@
+name: {{MACHINE}}
+services:
+  web:
+    image: dunglas/frankenphp:1-php8.4
+    restart: unless-stopped
+    ports:
+      - "${JETSTREAM_HOST_PORT:-8080}:80"
+    volumes:
+      - .:/app
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db-data:/var/lib/mysql
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${DRUPAL_DB_NAME:-drupal}
+      MYSQL_USER: ${DRUPAL_DB_USER:-drupal}
+      MYSQL_PASSWORD: ${DRUPAL_DB_PASSWORD:-drupal}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: valkey/valkey:8
+    restart: unless-stopped
+    profiles: ["redis"]
+    volumes:
+      - redis-data:/data
+
+volumes:
+  db-data:
+  redis-data:

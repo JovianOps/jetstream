@@ -1,0 +1,13 @@
+# Caddyfile for the FrankenPHP web service.
+# FrankenPHP serves PHP directly (no separate php-fpm container).
+# Document root is the Drupal webroot; clean URLs via try_files.
+{
+	frankenphp
+}
+
+:80 {
+	root * /app/web
+	encode gzip
+	file_server
+	php_server
+}

@@ -1,0 +1,25 @@
+{
+  "jetstream": "1",
+  "files": [
+    {"path": "composer.json", "managed": true},
+    {"path": ".env.example", "managed": true},
+    {"path": ".gitignore", "managed": true},
+    {"path": ".editorconfig", "managed": true},
+    {"path": "docker-compose.yml", "managed": true},
+    {"path": "Caddyfile", "managed": true},
+    {"path": "drush/drush.yml", "managed": true},
+    {"path": "web/sites/default/settings.php", "managed": true},
+    {"path": "web/sites/default/includes/settings.lagoon.php", "managed": true, "when": {"hosting": "lagoon"}},
+    {"path": "web/sites/default/includes/settings.local.php", "managed": true},
+    {"path": "config/default/README.md", "managed": false},
+    {"path": "web/themes/custom/{{MACHINE}}_theme/{{MACHINE}}_theme.info.yml", "managed": false, "when": {"theme": true}},
+    {"path": "web/themes/custom/{{MACHINE}}_theme/{{MACHINE}}_theme.libraries.yml", "managed": false, "when": {"theme": true}},
+    {"path": ".github/workflows/ci.yml", "managed": true},
+    {"path": "docs/testing.md", "managed": false},
+    {"path": "docs/ci.md", "managed": false},
+    {"path": "docs/deployment.md", "managed": false},
+    {"path": "docs/releasing.md", "managed": false},
+    {"path": "docs/faqs.md", "managed": false},
+    {"path": "docs/updating.md", "managed": false}
+  ]
+}

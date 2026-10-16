@@ -1,0 +1,6 @@
+options:
+  uri: 'http://localhost:8080'
+drush:
+  paths:
+    alias-path:
+      - '${env.home}/.drush'

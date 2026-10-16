@@ -1,0 +1,15 @@
+.data/
+.env
+.env.local
+vendor/
+node_modules/
+web/core/
+web/modules/contrib/
+web/themes/contrib/
+web/profiles/contrib/
+web/libraries/
+web/sites/default/files/
+web/sites/default/private/
+web/sites/simpletest/
+*.sql
+*.sql.gz

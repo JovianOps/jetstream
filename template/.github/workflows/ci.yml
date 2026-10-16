@@ -1,0 +1,40 @@
+name: Build, test
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+      - run: composer validate --strict
+      - run: find web/sites web/themes/custom drush -name '*.php' -print0 | xargs -0 -n1 php -l
+      - run: docker compose config --quiet
+
+  build:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - run: cp .env.example .env
+      - run: docker compose up -d --wait
+      - run: composer install --no-progress --no-interaction
+      - run: composer build
+      - run: composer test
+      - run: curl -fsS http://localhost:8080/ > /dev/null
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+      - run: tar --exclude=.git -czf {{MACHINE}}-${{ github.ref_name }}.tar.gz .
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: "{{MACHINE}}-${{ github.ref_name }}.tar.gz"

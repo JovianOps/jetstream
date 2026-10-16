@@ -1,0 +1,5 @@
+name: '{{SITE}} theme'
+type: theme
+description: '{{DESCRIPTION}}'
+core_version_requirement: ^11
+base theme: olivero
