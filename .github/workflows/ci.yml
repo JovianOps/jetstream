@@ -33,6 +33,9 @@ jobs:
         working-directory: site
       - run: docker compose up -d --wait
         working-directory: site
+      - run: docker compose logs db
+        if: failure()
+        working-directory: site
       - run: composer install --no-progress --no-interaction
         working-directory: site
       - run: docker compose exec -T web drush --root=/app/web site:install minimal --account-mail=admin@example.com -y
