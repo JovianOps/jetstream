@@ -1,5 +1,7 @@
 # Dependabot: weekly minor/patch groups, majors solo, Jakarta mornings.
-# The template/ blocks keep generated projects fresh at the source.
+# NOTE: no composer block for template/ — its composer.json holds {{TOKENS}}
+# until installed, which the updater cannot parse. The docker block stays:
+# Dockerfile.web has no tokens.
 version: 2
 updates:
   - package-ecosystem: github-actions
@@ -17,23 +19,6 @@ updates:
     commit-message:
       prefix: chore
     open-pull-requests-limit: 5
-
-  - package-ecosystem: composer
-    directory: /template
-    schedule:
-      interval: weekly
-      day: monday
-      time: "06:00"
-      timezone: Asia/Jakarta
-    groups:
-      php-minor-patch:
-        patterns: ["*"]
-        update-types: [minor, patch]
-    labels: [dependencies, php]
-    commit-message:
-      prefix: chore
-      include: scope
-    open-pull-requests-limit: 10
 
   - package-ecosystem: docker
     directory: /template
