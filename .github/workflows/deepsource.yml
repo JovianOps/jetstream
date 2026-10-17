@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Initialize DeepSource
-        uses: deepsource/starter-analysis/init@master
+        uses: DeepSourceCorp/starter-analysis/init@master
       - name: Run tests
         run: |
           if [ -f composer.json ]; then
@@ -27,4 +27,4 @@ jobs:
               npm test 2>/dev/null || true
           fi
       - name: Send to DeepSource
-        uses: deepsource/starter-analysis/stages/report@master
+        uses: DeepSourceCorp/starter-analysis/stages/report@master
