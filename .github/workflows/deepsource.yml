@@ -1,0 +1,30 @@
+name: DeepSource
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "37 22 * * *"
+permissions:
+  contents: read
+  checks: write
+  pull-requests: read
+jobs:
+  deepsource:
+    name: DeepSource Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Initialize DeepSource
+        uses: deepsource/starter-analysis/init@master
+      - name: Run tests
+        run: |
+          if [ -f composer.json ]; then
+              composer install --no-interaction --no-progress --prefer-dist
+              vendor/bin/phpunit 2>/dev/null || true
+          fi
+          if [ -f package.json ]; then
+              npm ci 2>/dev/null || npm install 2>/dev/null || true
+              npm test 2>/dev/null || true
+          fi
+      - name: Send to DeepSource
+        uses: deepsource/starter-analysis/stages/report@master
