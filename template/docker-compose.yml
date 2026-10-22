@@ -21,7 +21,7 @@ services:
       retries: 5
 
   db:
-    image: mysql:8.4
+    image: mysql:26.10
     restart: unless-stopped
     volumes:
       - db-data:/var/lib/mysql
@@ -39,7 +39,7 @@ services:
       start_period: 30s
 
   redis:
-    image: valkey/valkey:8
+    image: valkey/valkey:9
     restart: unless-stopped
     profiles: ["redis"]
     volumes:
